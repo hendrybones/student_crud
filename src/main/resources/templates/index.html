@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,27 @@
   <title>Student management system</title>
 </head>
 <body>
+<!--create navigation bar(header)-->
+<nav th:fragment="navbar" class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" th:href="@{/}">Student Management System</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a class="nav-link" th:href="@{/student}">Student List</a></li>
+      <li><a class="nav-link" th:href="@{/teachers}">Lectures</a></li>
+      <li><a class="nav-link" th:href="@{/studentDetails}">Student Details</a></li>
+      <li><a class="nav-link" th:href="@{/student_units}">Student Units</a></li>
+    </ul>
+  </div>
+  <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container my-2">
+  Welcome<span sec:authenication="principal.username">User</span>
 
   <h1>Student List</h1>
 

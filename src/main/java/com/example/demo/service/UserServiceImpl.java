@@ -4,6 +4,7 @@ import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.web.dto.UserRegistrationDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
-
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserRepository userRepository;
 
@@ -35,7 +36,6 @@ public class UserServiceImpl implements UserService{
                 userRegistrationDto.getLastName(),
                 userRegistrationDto.getEmail(),
                 bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_User")));
-
         return userRepository.save(user);
 
     }
